@@ -1,4 +1,3 @@
-const steamUser = require('steam-user');
 const steamTotp = require('steam-totp');
 const keep_alive = require('./keep_alive.js')
 
@@ -6,7 +5,7 @@ var username = process.env.username;
 var password = process.env.password;
 var shared_secret = process.env.shared;
 
-var games = [730, 1628760, 1044450];  // Enter here AppIDs of the needed games
+var games = [730, 440, 570];  // Enter here AppIDs of the needed games
 var status = 1;  // 1 - online, 7 - invisible
 
 
@@ -17,7 +16,6 @@ user.on('loggedOn', () => {
 	user.setPersona(status);               
 	user.gamesPlayed(games);
 });
-
 
 var username2 = process.env.username2;
 var password2 = process.env.password2;
@@ -61,19 +59,4 @@ user4.on('loggedOn', () => {
     if (user4.steamID != null) console.log(user4.steamID + ' - Inicio de sesión exitoso');
     user4.setPersona(status4);               
     user4.gamesPlayed(games4);
-});
-
-var username5 = process.env.username5;
-var password5 = process.env.password5;
-var shared_secret5 = process.env.shared5;
-
-var games5 = [730, 578080, 570];  // Ingresa aquí los AppIDs de los juegos necesarios
-var status5 = 1;  // 1 - en línea, 7 - invisible
-
-user5 = new steamUser();
-user5.logOn({"accountName": username5, "password": password5, "twoFactorCode": steamTotp.generateAuthCode(shared_secret5)});
-user5.on('loggedOn', () => {
-    if (user5.steamID != null) console.log(user5.steamID + ' - Inicio de sesión exitoso');
-    user5.setPersona(status5);               
-    user5.gamesPlayed(games5);
 });
